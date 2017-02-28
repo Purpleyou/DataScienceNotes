@@ -1,4 +1,3 @@
-
 require(Information)
 
 
@@ -14,7 +13,7 @@ WOE.trans = function(data, target) {
   which_group = function(x) {
     if (is.na(x)) {
       return(NA)
-    }                              # `if` first, then `for` loop
+    }                                           # `if` first, then `for` loop
     
     if (x > cuts[length(cuts)]) {
       return(length(cuts) + 1)
@@ -40,7 +39,7 @@ WOE.trans = function(data, target) {
     
     if (is.na(value) && is.na(cuts[1])) {
       return(woe[1])
-    }    # woe[1] is the woe of `NA`
+    }                                            # woe[1] is the woe of `NA`
     
     if (is.na(cuts[1])) {
       for (i in 2:length(cuts)) {
@@ -54,7 +53,7 @@ WOE.trans = function(data, target) {
           return (woe[i])
         }
       }
-    }          # woe[2] to woe[-2]
+    }                                            # woe[2] to woe[-2]
     
     return(woe[length(woe)])                     # woe[-1]
   }
@@ -144,8 +143,6 @@ WOE.trans = function(data, target) {
 
 
 # test data ================================================================
-
 data(train, package = "Information")
-data(valid, package = "Information")
 
 train.transformed = WOE.trans(train, "PURCHASE")
