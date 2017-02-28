@@ -1,7 +1,6 @@
+
 require(Information)
 
-
-# wrap all above into a function =========================================
 
 WOE.trans = function(data, target) {
   # Input:
@@ -15,11 +14,11 @@ WOE.trans = function(data, target) {
   which_group = function(x) {
     if (is.na(x)) {
       return(NA)
-    }                              # if first, then for loop
+    }                              # `if` first, then `for` loop
     
     if (x > cuts[length(cuts)]) {
       return(length(cuts) + 1)
-    }  # if first, then for loop
+    }
     
     for (i in 1:length(cuts)) {
       if (x <= cuts[i]) {
@@ -78,23 +77,23 @@ WOE.trans = function(data, target) {
   }
   
   #
-  columns = names(data[!(names(data) %in% target)])     # return the independent variable names
+  columns = names(data[!(names(data) %in% target)])      # return the independent variable names
   
   new_vector = c()
   new_name = c()
   
   for (i in 1:length(columns)) {
     vec = data[, columns[i] == names(data)]
-    if (length(unique(vec)) > 30) {                     # only transform a variable when the unique values > 30
+    if (length(unique(vec)) > 30) {                      # only transform a variable when the unique values > 30
       
       df = data.frame(value = vec, target = data[, target])
       
-      if (anyNA(df$value)) {                 # omit NA to use disc.Topdown
+      if (anyNA(df$value)) {                             # omit NA to use disc.Topdown
         df.no.na = na.omit(df)
-        TD = disc.Topdown(df.no.na)          # CAIM algorithm
+        TD = disc.Topdown(df.no.na)                      # CAIM algorithm
       } else{
-        TD = disc.Topdown(df)                # CAIM algorithm
-      }                                      # ifelse returns a list
+        TD = disc.Topdown(df)                            # CAIM algorithm
+      }                                                  # ifelse returns a list
       
       cuts = TD$cutp[[1]][-c(1, (length(TD$cutp[[1]])))] # remove the 1st and the last values
       
@@ -110,14 +109,14 @@ WOE.trans = function(data, target) {
       if (anyNA(df$value)) {
         n_good = length(which(df[which(is.na(df$group)), ]$target == 1))
         n_bad = length(which(df[which(is.na(df$group)), ]$target == 0))
-        woe[1] = log(n_good / n_bad) - Q                 # woe[1] for NA class
+        woe[1] = log(n_good / n_bad) - Q                  # woe[1] for NA class
         
         for (i in 1:(n_groups - 1)) {
           n_good = length(which(df[which(df$group == i), ]$target == 1))
           n_bad = length(which(df[which(df$group == i), ]$target == 0))
           woe[i + 1] = log(n_good / n_bad) - Q
         }
-      } else{                                            # for data containing no NA
+      } else{                                             # for data containing no NA
         for (i in 1:n_groups) {
           n_good = length(which(df[which(df$group == i), ]$target == 1))
           n_bad = length(which(df[which(df$group == i), ]$target == 0))
