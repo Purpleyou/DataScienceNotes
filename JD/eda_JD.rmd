@@ -1,0 +1,117 @@
+---
+title: "eda_JD"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+## Dt_action02: Action Information in 2016-02
+```{r }
+library(data.table)
+library(ggplot2)
+
+dt_action02 <- fread("/Users/zhangpurple/Documents/aguacha/JData/Data/JData_Action_201602.csv")
+head(dt_action02)
+
+#unique(dt_action02$model_id)
+#summary(dt_action02)
+
+qplot(model_id, data = dt_action02, geom = "bar")
+#hist(dt_action02$model_id)
+qplot(type, data = dt_action02, geom = "bar")
+#hist(dt_action02$type)
+qplot(cate, data = dt_action02, geom = "bar")
+#hist(dt_action02$cate)
+```
+
+
+## Dt_action03: Action Information in 2016-03
+```{r }
+library(data.table)
+library(ggplot2)
+
+dt_action03 <- fread("/Users/zhangpurple/Documents/aguacha/JData/Data/JData_Action_201603.csv")
+head(dt_action03)
+
+#unique(dt_action02$model_id)
+#summary(dt_action02)
+
+qplot(model_id, data = dt_action03, geom = "bar")
+#hist(dt_action02$model_id)
+qplot(type, data = dt_action03, geom = "bar")
+#hist(dt_action02$type)
+qplot(cate, data = dt_action03, geom = "bar")
+#hist(dt_action02$cate)
+```
+
+
+## Dt_action04: Action Information in 2016-04
+```{r }
+library(data.table)
+library(ggplot2)
+
+dt_action04 <- fread("/Users/zhangpurple/Documents/aguacha/JData/Data/JData_Action_201604.csv")
+head(dt_action04)
+
+#unique(dt_action02$model_id)
+#summary(dt_action02)
+
+qplot(model_id, data = dt_action04, geom = "bar")
+#hist(dt_action02$model_id)
+qplot(type, data = dt_action04, geom = "bar")
+#hist(dt_action02$type)
+qplot(cate, data = dt_action04, geom = "bar")
+#hist(dt_action02$cate)
+```
+
+## Dt_Comment : User Comment 
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+dt_comment <- fread("/Users/zhangpurple/Documents/aguacha/JData/Data/JData_Comment.csv")
+head(dt_comment)
+
+qplot(comment_num, data = dt_comment, geom = "bar", colour = factor(comment_num))
+qplot(has_bad_comment, data = dt_comment, geom = "bar", colour = factor(comment_num))
+qplot(bad_comment_rate, data = dt_comment, geom = "line")
+```
+
+## Dt_Users : User Information 
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+dt_user <- fread("/Users/zhangpurple/Documents/aguacha/JData/Data/JData_User.csv")
+head(dt_user)
+dt_user2 <- dt_user[, user_reg_dt := as.factor(user_reg_dt)]
+qplot(sex, data = dt_user2, geom = "bar", colour = factor(sex))
+dt_user3 <- dt_user[order(as.Date(dt_user$user_reg_dt, format="%Y/%m/%d"))]
+qplot(user_reg_dt, data = dt_user3, geom = "bar")
+qplot(user_lv_cd, data = dt_user2, geom = "bar")
+```
+
+
+## Dt_Users : User Information 
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+dt_user <- fread("/Users/zhangpurple/Documents/aguacha/JData/Data/JData_User.csv")
+head(dt_user)
+dt_user2 <- dt_user[, user_reg_dt := as.factor(user_reg_dt)]
+qplot(sex, data = dt_user2, geom = "bar", colour = factor(sex))
+dt_user3 <- dt_user[order(as.Date(dt_user$user_reg_dt, format="%Y/%m/%d"))]
+qplot(user_reg_dt, data = dt_user3, geom = "bar")
+qplot(user_lv_cd, data = dt_user2, geom = "bar")
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
