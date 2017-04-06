@@ -7,6 +7,10 @@ According to the scoring standard, it is reasonable to seperate our task into tw
 - For those who would buy any products, what would they buy. 
 
 
+### 任务描述：
+
+参赛者需要使用京东多个品类下商品的历史销售数据，构建算法模型，预测用户在未来5天内，对某个目标品类下商品的购买意向。对于训练集中出现的每一个用户，参赛者的模型需要预测该用户在未来5天内是否购买目标品类下的商品以及所购买商品的SKU_ID。评测算法将针对参赛者提交的预测结果，计算加权得分。
+
 ### Scoring
 
 参赛者提交的结果文件中包含对所有用户购买意向的预测结果。对每一个用户的预测结果包括两方面：
